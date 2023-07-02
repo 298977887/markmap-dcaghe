@@ -3,9 +3,10 @@ import { Transformer } from 'markmap-lib';
 import { Markmap } from 'markmap-view';
 
 const transformer = new Transformer();
-const initValue = `# markmap
+const initValue = `
+# markmap
 
-- beautiful
+- 123
 - useful
 - easy
 - interactive
