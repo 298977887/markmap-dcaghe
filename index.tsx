@@ -8,18 +8,11 @@ import './style.css';
 
 // 初始化Transformer和初始值
 const transformer = new Transformer();
-const initValueHooks = `# markmap
-- beautiful
-- useful
-- easy
-- interactive
+const initValueHooks = `
+
 `;
 const initValueClass = `
-# markmap
-- 123
-- useful
-- easy
-- interactive
+
 `;
 
 // 定义MarkmapClass类组件
@@ -66,20 +59,16 @@ class MarkmapClass extends Component {
     );
   }
 }
-
 // 定义MarkmapHooks函数组件
 function MarkmapHooks() {
   const [value, setValue] = useState(initValueHooks);
   const refSvg = useRef<SVGSVGElement>();
   const refMm = useRef<Markmap>();
   const refToolbar = useRef<HTMLDivElement>();
-
   useEffect(() => {
     const mm = Markmap.create(refSvg.current);
     refMm.current = mm;
-    renderToolbar(refMm.current, refToolbar.current);
   }, [refSvg.current]);
-
   useEffect(() => {
     const mm = refMm.current;
     if (!mm) return;
@@ -91,7 +80,6 @@ function MarkmapHooks() {
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-
   return (
     <React.Fragment>
       <div className="flex-1">
@@ -105,23 +93,6 @@ function MarkmapHooks() {
       <div className="absolute bottom-1 right-1" ref={refToolbar}></div>
     </React.Fragment>
   );
-}
-
-// 定义渲染工具栏的函数
-function renderToolbar(mm: Markmap, wrapper: HTMLElement) {
-  while (wrapper?.firstChild) wrapper.firstChild.remove();
-  if (mm && wrapper) {
-    const toolbar = new Toolbar();
-    toolbar.attach(mm);
-    toolbar.register({
-      id: 'alert',
-      title: 'Click to show an alert',
-      content: 'Alert',
-      onClick: () => alert('You made it!'),
-    });
-    toolbar.setItems([...Toolbar.defaultItems, 'alert']);
-    wrapper.append(toolbar.render());
-  }
 }
 
 // 定义App函数组件
