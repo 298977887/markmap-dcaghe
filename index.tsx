@@ -135,8 +135,8 @@ function App() {
         value={type}
         onChange={(e) => setType(e.target.value)}
       >
-        <option value="hooks">Hooks</option>
         <option value="class">Class</option>
+        <option value="hooks">Hooks</option>
       </select>
       <Component />
     </div>
